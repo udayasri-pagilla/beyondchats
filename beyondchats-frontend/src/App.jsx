@@ -1,12 +1,12 @@
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import ArticleDetail from "./pages/ArticleDetail";
 
 export default function App() {
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-center p-4">
-        BeyondChats Articles
-      </h1>
-      <Home />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/article/:id" element={<ArticleDetail />} />
+    </Routes>
   );
 }
