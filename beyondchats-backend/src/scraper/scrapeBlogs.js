@@ -37,7 +37,11 @@ export const scrapeBlogs = async () => {
     const $$ = cheerio.load(res.data);
 
     const title = $$("h1").first().text().trim();
-    const content = $$("article").text().trim();
+    const content = $$("article")
+  .text()
+  .replace(/\s+/g, " ")
+  .trim();
+
 
     if (!title || !content) continue;
 
