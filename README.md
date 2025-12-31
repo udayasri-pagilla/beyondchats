@@ -1,42 +1,51 @@
->>>>BeyondChats Article Automation Platform
+BeyondChats Article Automation Platform 🚀
 
-A full-stack web application that scrapes articles from BeyondChats, enriches them using competitor insights, and presents both original and AI-enhanced versions through a clean, modern UI.
+A full-stack web application that scrapes articles from the BeyondChats blog, enriches them using competitor insights, and presents both original and AI-enhanced articles through a clean, modern user interface.
 
 This project was built as part of the BeyondChats – Full Stack Web Developer Intern Assignment.
 
->>> Live Demo
+🔗 Live Demo
 
->> Frontend Live URL: https://beyondchats-ten.vercel.app/
->> Backend API URL: https://beyondchats-backend-ys8y.onrender.com
+Frontend (Vercel):
+👉 https://beyondchats-ten.vercel.app
 
->>>> Problem Statement
+Backend API (Render):
+👉 https://beyondchats-backend-ys8y.onrender.com
 
-The goal of this assignment was to:
+👉 Articles API: /api/articles
+👉 Automation Trigger: /run-automation
 
-Scrape the oldest articles from BeyondChats blog
+📌 Problem Statement
 
-Store and manage them via CRUD APIs
+The objective of this assignment was to:
+
+Scrape the oldest articles from the BeyondChats blog
+
+Store and manage articles using REST APIs
 
 Automate article enhancement using competitor content
 
-Display original and generated articles in a professional UI
+Display original vs generated articles in a professional UI
 
->>>> Architecture Overview
+Build a scalable, production-ready full-stack solution
+
+🏗️ Architecture Overview
 High-Level Flow
 BeyondChats Blog
-      ↓
+        ↓
 Web Scraper (Cheerio)
-      ↓
+        ↓
 MongoDB (Articles Collection)
-      ↓
+        ↓
 REST APIs (Node.js + Express)
-      ↓
-Automation Script (Google Search + Scraping + LLM)
-      ↓
-React Frontend (Vite + Tailwind)
+        ↓
+Automation Pipeline
+(Google Search + Scraping + LLM)
+        ↓
+React Frontend (Vite + Tailwind CSS)
 
->>> Features
->>> Phase 1 – Backend & Scraping
+✨ Features
+Phase 1 – Backend & Scraping
 
 Scrapes 5 oldest BeyondChats blog articles
 
@@ -46,21 +55,27 @@ Full CRUD APIs for articles
 
 Clean MVC folder structure
 
->>> Phase 2 – Automation Pipeline
+Error handling & logging
 
-Fetches articles from backend APIs
+Phase 2 – Automation Pipeline
+
+Fetches original articles from backend APIs
 
 Searches article titles on Google
 
 Scrapes top competitor articles
 
-Enhances original content using LLM (Groq / fallback logic)
+Enhances content using LLM (Groq – optional)
 
-Stores generated articles with references
+Fallback logic when LLM is unavailable
 
->>> Phase 3 – Frontend (React)
+Stores enhanced articles as separate documents
 
-Clean card-based UI (Tailwind CSS)
+Saves competitor links as references
+
+Phase 3 – Frontend (React)
+
+Clean card-based UI
 
 Filters: All / Original / Generated
 
@@ -70,7 +85,9 @@ Generated articles show references
 
 Fully responsive design
 
->>>> Tech Stack
+Built with Tailwind CSS
+
+🛠️ Tech Stack
 Backend
 
 Node.js
@@ -91,7 +108,7 @@ Google Search scraping
 
 Cheerio
 
-LLM integration (Groq – optional / fallback supported)
+LLM integration (Groq – optional with fallback)
 
 Frontend
 
@@ -107,9 +124,13 @@ Git & GitHub
 
 GitHub Secret Scanning Protection
 
+Render (Backend Deployment)
+
+Vercel (Frontend Deployment)
+
 PowerShell (Windows)
 
->>>>> Folder Structure
+📂 Folder Structure
 Backend
 beyondchats-backend/
 ├── src/
@@ -134,12 +155,12 @@ beyondchats-frontend/
 ├── postcss.config.js
 └── package.json
 
->>> Local Setup Instructions
->>>Clone the Repository
+⚙️ Local Setup Instructions
+1️⃣ Clone the Repository
 git clone https://github.com/udayasri-pagilla/beyondchats.git
 cd beyondchats
 
->>>Backend Setup
+2️⃣ Backend Setup
 cd beyondchats-backend
 npm install
 
@@ -155,18 +176,47 @@ Run backend:
 
 npm run dev
 
- Run Automation Script (Phase 2)
+3️⃣ Run Automation (Phase 2)
 node src/automation/runAutomation.js
 
 
->>> LLM is optional — fallback logic ensures script runs even without credits.
+⚠️ LLM is optional — fallback logic ensures automation works even without API credits.
 
->>> Frontend Setup
+4️⃣ Frontend Setup
 cd ../beyondchats-frontend
 npm install
 npm run dev
 
 
-Open:
+Open in browser:
 
 http://localhost:5173
+
+🔐 Security Notes
+
+.env files are ignored via .gitignore
+
+API keys are never committed
+
+GitHub Push Protection enabled for secrets
+
+📈 Future Improvements
+
+Full-text search
+
+Pagination
+
+Admin dashboard
+
+Cron-based automation
+
+Better article summarization
+
+Auth & role-based access
+
+👩‍💻 Author
+
+Udayasri Pagilla
+Full Stack Developer (Intern Candidate)
+
+GitHub: https://github.com/udayasri-pagilla
