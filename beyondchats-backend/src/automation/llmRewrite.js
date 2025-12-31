@@ -1,53 +1,46 @@
-import Groq from "groq-sdk";
+export default async function llmRewrite(
+  originalContent,
+  externalContents
+) {
+  console.log(" Attempting LLM rewrite...");
 
-const llmRewrite = async (originalContent, externalContents = []) => {
-  // If no references, skip rewrite
-  if (!externalContents.length) {
-    console.log("⚠️ No external content, skipping LLM rewrite");
-    return originalContent;
-  }
-
-  // If no API key, skip rewrite safely
-  if (!process.env.GROQ_API_KEY) {
-    console.log("⚠️ GROQ_API_KEY missing, skipping LLM rewrite");
+  // If no external content, fallback
+  if (!externalContents || externalContents.length === 0) {
+    console.log(" No external content, using original");
     return originalContent;
   }
 
   try {
+    // Dynamically import Groq ONLY if available
+    const { default: Groq } = await import("groq-sdk");
+
     const groq = new Groq({
       apiKey: process.env.GROQ_API_KEY,
     });
 
     const prompt = `
-Rewrite the following article using insights from reference articles.
-Do NOT copy sentences. Keep it original, structured, and readable.
+Rewrite the following article using insights from competitor articles.
 
-ORIGINAL:
+ORIGINAL ARTICLE:
 ${originalContent}
 
-REFERENCE 1:
-${externalContents[0]}
+COMPETITOR CONTENT:
+${externalContents.join("\n\n")}
 
-REFERENCE 2:
-${externalContents[1] || ""}
-
-Return only rewritten content.
+Rewrite in a clean, professional blog format.
 `;
 
-    console.log("🤖 Attempting LLM rewrite...");
-
     const response = await groq.chat.completions.create({
-      // ⚠️ model intentionally configurable
-      model: process.env.GROQ_MODEL || "llama-3.1-8b-instant",
+      model: "llama-3.1-8b-instant",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.7,
     });
 
-    return response.choices[0]?.message?.content?.trim() || originalContent;
+    return response.choices[0].message.content;
   } catch (error) {
-    console.log(" LLM unavailable, falling back to original content");
+    console.warn(
+      "LLM unavailable, falling back to original content"
+    );
     return originalContent;
   }
-};
-
-export default llmRewrite;
+}
