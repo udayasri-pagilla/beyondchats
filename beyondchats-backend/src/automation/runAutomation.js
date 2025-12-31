@@ -1,39 +1,37 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-
 import fetchArticles from "./fetchArticles.js";
 import googleSearch from "./googleSearch.js";
 import scrapeExternal from "./scrapeExternal.js";
 import llmRewrite from "./llmRewrite.js";
 import publishArticle from "./publishArticle.js";
 
-const runAutomation = async () => {
-  console.log("Phase 2 automation started");
+export default async function runAutomation() {
+  console.log(" Phase 2 automation started");
 
-  // 1. fetch original articles
+  // 1. Fetch original articles
   const articles = await fetchArticles();
 
   for (const article of articles) {
-    console.log(`\nProcessing: ${article.title}`);
+    console.log(`\n Processing: ${article.title}`);
 
-    // 2. google search
+    // 2. Google search
     const links = await googleSearch(article.title);
 
-    // 3. scrape competitor articles
+    // 3. Scrape competitor articles
     const externalContents = await scrapeExternal(links);
 
-    // 4. rewrite using LLM
+    // 4. Rewrite using LLM (or fallback)
     const newContent = await llmRewrite(
       article.content,
       externalContents
     );
 
-    // 5. publish generated article
+    // 5. Publish generated article
     await publishArticle(article, newContent, links);
   }
 
   console.log("\n Phase 2 automation completed");
-};
+}
 
-runAutomation();

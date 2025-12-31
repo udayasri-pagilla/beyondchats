@@ -45,7 +45,7 @@ Return only rewritten content.
 
     return response.choices[0]?.message?.content?.trim() || originalContent;
   } catch (error) {
-    console.log("⚠️ LLM unavailable, falling back to original content");
+    console.log(" LLM unavailable, falling back to original content");
     return originalContent;
   }
 };
