@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000/api/articles";
+const API_BASE_URL = "https://beyondchats-backend-ys8y.onrender.com/api/articles";
 
 const fetchArticles = async () => {
   try {
